@@ -51,6 +51,12 @@
   .price-tag2{font-family:'Sora';font-size:14px;font-weight:700;background:var(--pop);color:#fff;padding:4px 12px;border-radius:99px}
   .price-note{font-size:14.5px;color:var(--ink-soft);line-height:1.55}
   .price-note b{color:var(--aqua-deep)}
+  .chart{display:flex;align-items:flex-end;gap:16px;height:130px;margin:16px 8px 4px}
+  .bar{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px;height:100%}
+  .bar-fill{width:100%;max-width:96px;background:var(--aqua);border-radius:8px 8px 0 0}
+  .bar.today .bar-fill{background:var(--pop)}
+  .bar-val{font-family:'Sora';font-weight:800;font-size:17px;color:var(--aqua-deep)}
+  .bar-day{font-size:12.5px;color:var(--ink-soft);font-weight:600;text-align:center}
 
   section{padding:40px 0 8px}
   .sec-label{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--pop);margin-bottom:8px}
@@ -111,16 +117,17 @@
 <div class="stats wrap">
   <div class="blitz">🚨 <b>THE BLITZ IS LIVE — happening now through Sunday.</b> We're putting <b>$5,000 into creator incentives</b> and a <b>$5,000+ minimum in ad spend</b> behind Clear Rear this week — budget ramping 3–4x. Everything you post this week gets our full push. Videos and LIVEs both count — DM us to lock in.</div>
   <div class="price-card">
-    <div class="price-label">💸 Blitz pricing — steep discounts live globally</div>
+    <div class="price-label">💸 Blitz pricing — steep discounts live globally · THIS WEEK ONLY</div>
     <div class="price-row">
       <span class="price-big">$49.99</span>
       <span class="price-tag2">2-PACK BUNDLE · −44%</span>
       <span class="price-strike">$89.99</span>
     </div>
-    <div class="price-note">Steep discounts running all blitz week: <b>2-pack $49.99 (−44%)</b> · <b>Single $33.99 (−51%)</b> · <b>Hot/Cold $39.99 (−56%)</b> — with free 3-day delivery and free returns on every listing. Straight from the live listing:</div>
-    <div style="display:flex;gap:10px;margin-top:12px">
-      <a href="deal-2pack.png" target="_blank" style="flex:1"><img src="deal-2pack.png" alt="Clear Rear 2-pack listing: $49.99, 44% off" style="width:100%;border-radius:12px;border:1px solid var(--line)"></a>
-      <a href="deal-single.png" target="_blank" style="flex:1"><img src="deal-single.png" alt="Clear Rear single listing: $33.99, 51% off" style="width:100%;border-radius:12px;border:1px solid var(--line)"></a>
+    <div class="price-note">This week only, while the blitz runs: <b>2-pack $49.99 (−44%)</b> · <b>Single $33.99 (−51%)</b> · <b>Hot/Cold $39.99 (−56%)</b> — with free 3-day delivery and free returns on every listing. Straight from the live listings:</div>
+    <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
+      <a href="shot-2pack.png" target="_blank" style="flex:1;min-width:140px"><img src="shot-2pack.png" alt="Clear Rear 2-pack listing: $49.99, 44% off" style="width:100%;border-radius:12px;border:1px solid var(--line)"></a>
+      <a href="shot-single.png" target="_blank" style="flex:1;min-width:140px"><img src="shot-single.png" alt="Clear Rear single listing: $33.99, 51% off" style="width:100%;border-radius:12px;border:1px solid var(--line)"></a>
+      <a href="shot-hotcold.png" target="_blank" style="flex:1;min-width:140px"><img src="shot-hotcold.png" alt="Clear Rear Hot/Cold listing: $39.99, 56% off" style="width:100%;border-radius:12px;border:1px solid var(--line)"></a>
     </div>
   </div>
   <div class="stat-grid">
@@ -269,8 +276,13 @@
 
 <section class="wrap">
   <div class="sec-label">Fresh today · Blitz wave 1</div>
-  <h2>15 new posts this morning — the blitz is moving</h2>
-  <div class="data-note">Content is flying up right now. Standouts from the last 24 hours below — these are the ones to learn from (and beat) this week.</div>
+  <h2>Posting is ramping — fast</h2>
+  <div class="chart">
+    <div class="bar"><span class="bar-val">11</span><div class="bar-fill" style="height:45%"></div><span class="bar-day">Sat 7/4</span></div>
+    <div class="bar"><span class="bar-val">22</span><div class="bar-fill" style="height:90%"></div><span class="bar-day">Sun 7/5</span></div>
+    <div class="bar today"><span class="bar-val">8+</span><div class="bar-fill" style="height:33%"></div><span class="bar-day">Mon 7/6<br>(so far — day 1 of blitz)</span></div>
+  </div>
+  <div class="data-note" style="margin-top:10px">Clear Rear posts doubled Saturday to Sunday, and blitz day is just getting started. Standouts from the last 24 hours below — the ones to learn from (and beat) this week.</div>
 
   <div class="vid">
     <div class="vid-top"><span class="vid-handle">@muscle_dad</span><a class="vid-cta" href="https://tiktok.com/@muscle_dad/video/7658895778471087373" target="_blank" rel="noopener">▶ Watch</a></div>
