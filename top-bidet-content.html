@@ -162,7 +162,7 @@ function applyMeta(id, pub){
   if(!card) return;
   if(m.url) card.href = m.url;
   const th = card.querySelector('.thumb');
-  if(m.thumb && !th.querySelector('img')){ const img=new Image(); img.loading='lazy'; img.onload=()=>th.prepend(img); img.src=m.thumb; }
+  if(m.thumb && !th.querySelector('img')){ const img=new Image(); img.onload=()=>th.prepend(img); img.src=m.thumb; }
   if(m.handle) document.getElementById('w_'+id).textContent = m.handle + ' · ' + pub;
 }
 function hydrate(id, pub){
