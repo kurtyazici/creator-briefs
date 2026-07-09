@@ -47,13 +47,13 @@
 </style>
 </head>
 <body>
-<button id="mode" title="Toggle light/dark mode">ð</button>
+<button id="mode" title="Toggle light/dark mode">Ã°ÂÂÂ</button>
 <div class="wrap">
   <div class="bar">
     <div>
-      <div class="kicker">Kalo Data Brief Â· Updated July 9, 2026</div>
+      <div class="kicker">Kalo Data Brief ÃÂ· Updated July 9, 2026</div>
       <h1>Top Bidet Content</h1>
-      <div class="subline">Top bidet &amp; smart toilet products incl. Clear Rear Â· videos over $250 revenue Â· <span id="count"></span></div>
+      <div class="subline">Top bidet &amp; smart toilet products incl. Clear Rear ÃÂ· videos over $250 revenue ÃÂ· <span id="count"></span></div>
     </div>
     <div class="spacer"></div>
     <div class="toggle">
@@ -65,7 +65,7 @@
 
   <div class="grid" id="grid"></div>
 
-  <div class="foot">Source: Kalodata Â· TikTok Shop US Â· Tap a video to watch on TikTok Â· Revenue/views are per selected window</div>
+  <div class="foot">Source: Kalodata ÃÂ· TikTok Shop US ÃÂ· Tap a video to watch on TikTok ÃÂ· Revenue/views are per selected window</div>
 </div>
 
 <script>
@@ -154,7 +154,7 @@ function setRange(n){
   document.getElementById('count').textContent = list.length + ' videos';
   document.getElementById('grid').innerHTML = list.length ? list.map((v,i)=>`
     <a class="card" id="c_${v[0]}" href="https://www.tiktok.com/@i/video/${v[0]}" target="_blank">
-      <div class="thumb"><span class="ph">â¶</span><span class="rank">#${i+1}</span><span class="ptag">${v[1]}</span></div>
+      <div class="thumb"><span class="ph">Ã¢ÂÂ¶</span><span class="rank">#${i+1}</span><span class="ptag">${v[1]}</span></div>
       <div class="cardbody">
         <div class="nums"><span class="rev">${fmt(v[o])}</span><span class="views">${v[o+1]}${v[o+1]?' views':''}</span></div>
         <div class="who" id="w_${v[0]}">${v[2]}</div>
@@ -169,7 +169,7 @@ function applyMeta(id, pub){
   if(m.url) card.href = m.url;
   const th = card.querySelector('.thumb');
   if(m.thumb && !th.querySelector('img')){ const img=new Image(); img.onload=()=>th.prepend(img); img.src=m.thumb; }
-  if(m.handle) document.getElementById('w_'+id).textContent = m.handle + ' Â· ' + pub;
+  if(m.handle) document.getElementById('w_'+id).textContent = m.handle + ' ÃÂ· ' + pub;
 }
 function hydrate(id, pub){
   if(meta[id]){ applyMeta(id, pub); return; }
@@ -185,13 +185,14 @@ setRange(30);
 const mBtn = document.getElementById('mode');
 function applyMode(m){
   document.documentElement.dataset.theme = m;
-  mBtn.textContent = m === 'dark' ? 'âï¸' : 'ð';
+  mBtn.textContent = m === 'dark' ? 'Ã¢ÂÂÃ¯Â¸Â' : 'Ã°ÂÂÂ';
   try{ localStorage.setItem('kalo-theme', m); }catch(e){}
 }
 mBtn.onclick = () => applyMode(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
 let saved = 'light'; try{ saved = localStorage.getItem('kalo-theme') || 'light'; }catch(e){}
 applyMode(saved);
 </script>
+
 <script>(function(){
 window.__RISING_SINCE="2026-07-01";
 window.__PREV_RISING=["7659851710961044749","7659408175220673806","7659101277267168542","7658896126246014222","7658894799084244237","7659188273356508447","7658894721556761870","7657473838908771614"];
@@ -204,20 +205,19 @@ if(bar) bar.appendChild(rb);
 var _orig=window.setRange;
 window.setRange=function(x){ if(x==="rising"){ if(bar) bar.querySelectorAll("button").forEach(function(b){b.classList.remove("on");}); rb.classList.add("on"); return showRising(); } rb.classList.remove("on"); return _orig(x); };
 function showRising(){
-  var sc=new Date(window.__RISING_SINCE+"T00:00:00"); var prev=window.__PREV_RISING||[];
-  var list=(window.__D||[]).filter(function(v){return v[3]>250 && pd(v[2])>=sc;});
-  list.sort(function(a,b){return pd(b[2])-pd(a[2]) || b[3]-a[3];});
-  document.getElementById("count").textContent=list.length+" rising";
-  document.getElementById("grid").innerHTML = list.length ? list.map(function(v){
-    var pin = prev.indexOf(v[0])===-1;
-    return '<a class="card" id="c_'+v[0]+'" href="https://www.tiktok.com/@i/video/'+v[0]+'" target="_blank">'
-      +'<div class="thumb"><span class="ph">\u25B6</span>'+(pin?'<span class="rank">\uD83D\uDCCC</span>':'')+'<span class="ptag">'+v[1]+'</span></div>'
-      +'<div class="cardbody"><div class="nums"><span class="rev">
-</html>
-+fmt(v[3])+'</span><span class="views">'+v[4]+' views</span></div>'
-      +'<div class="who" id="w_'+v[0]+'">'+v[2]+'</div></div></a>';
-  }).join("") : '<div class="empty">No rising videos in the last 7 days.</div>';
-  if(window.hydrate) list.forEach(function(v){window.hydrate(v[0], v[2]);});
+var sc=new Date(window.__RISING_SINCE+"T00:00:00"); var prev=window.__PREV_RISING||[];
+var list=(window.__D||[]).filter(function(v){return v[3]>250 && pd(v[2])>=sc;});
+list.sort(function(a,b){return pd(b[2])-pd(a[2]) || b[3]-a[3];});
+document.getElementById("count").textContent=list.length+" rising";
+document.getElementById("grid").innerHTML = list.length ? list.map(function(v){
+var pin = prev.indexOf(v[0])===-1;
+var h="<a class=\"card\" id=\"c_"+v[0]+"\" href=\"https://www.tiktok.com/@i/video/"+v[0]+"\" target=\"_blank\">";
+h+="<div class=\"thumb\"><span class=\"ph\">\u25B6</span>"+(pin?"<span class=\"rank\">\uD83D\uDCCC</span>":"")+"<span class=\"ptag\">"+v[1]+"</span></div>";
+h+="<div class=\"cardbody\"><div class=\"nums\"><span class=\"rev\">$"+fmt(v[3])+"</span><span class=\"views\">"+v[4]+" views</span></div>";
+h+="<div class=\"who\" id=\"w_"+v[0]+"\">"+v[2]+"</div></div></a>";
+return h;
+}).join("") : "<div class=\"empty\">No rising videos in the last 7 days.</div>";
+if(window.hydrate) list.forEach(function(v){window.hydrate(v[0], v[2]);});
 }
 window.showRising=showRising;
 })();</script>
