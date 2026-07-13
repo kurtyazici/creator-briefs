@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Top Seat Cushion Content</title>
+<style>
+  :root{
+    --teal:#0e7c7b; --bg:#f7f9fa; --card:#ffffff; --text:#25333f; --muted:#7a8a96;
+    --line:#e5ebee; --heading:#17324d;
+  }
+  html[data-theme="dark"]{
+    --teal:#45c9c6; --bg:#0f1620; --card:#1a2330; --text:#e8eef4; --muted:#9fb0be;
+    --line:#2a3545; --heading:#f2f6fa;
+  }
+  #mode{position:fixed;top:12px;right:12px;z-index:50;width:34px;height:34px;border-radius:50%;
+    border:1px solid rgba(127,127,127,.4);background:var(--card);cursor:pointer;font-size:15px;
+    box-shadow:0 2px 8px rgba(0,0,0,.2);line-height:1}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.45}
+  .wrap{max-width:980px;margin:0 auto;padding:24px 20px 50px}
+  .kicker{text-transform:uppercase;letter-spacing:.16em;font-size:11px;color:var(--muted)}
+  .bar{display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+  h1{font-size:26px;font-weight:800;color:var(--heading);margin-top:2px}
+  .subline{font-size:12px;color:var(--muted);margin-top:2px}
+  .spacer{flex:1}
+  .toggle{display:inline-flex;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:3px}
+  .toggle button{border:0;background:transparent;border-radius:999px;padding:6px 14px;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;white-space:nowrap}
+  .toggle button.on{background:#0e7c7b;color:#fff}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  @media(max-width:820px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:420px){.grid{grid-template-columns:1fr}}
+  a.card{display:block;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;text-decoration:none;color:var(--text);transition:transform .12s}
+  a.card:hover{transform:translateY(-2px)}
+  .thumb{position:relative;aspect-ratio:3/4;background:linear-gradient(135deg,#17324d,#0e7c7b);display:flex;align-items:center;justify-content:center}
+  .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .thumb .ph{color:#fff;opacity:.5;font-size:30px}
+  .thumb .rank{position:absolute;top:8px;left:8px;background:rgba(0,0,0,.55);color:#fff;font-size:11px;font-weight:700;border-radius:6px;padding:2px 7px;z-index:2}
+  .thumb .ptag{position:absolute;bottom:8px;left:8px;right:8px;background:rgba(0,0,0,.55);color:#fff;font-size:10px;font-weight:600;border-radius:6px;padding:2px 7px;z-index:2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .cardbody{padding:8px 10px}
+  .nums{display:flex;justify-content:space-between;align-items:baseline}
+  .rev{font-size:15px;font-weight:800;color:var(--teal)}
+  .views{font-size:12px;color:var(--muted)}
+  .who{font-size:11px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .empty{grid-column:1/-1;text-align:center;color:var(--muted);font-size:13px;padding:30px 0}
+  .foot{font-size:11px;color:var(--muted);margin-top:14px}
+</style>
+</head>
+<body>
+<button id="mode" title="Toggle light/dark mode">🌙</button>
+<div class="wrap">
+  <div class="bar">
+    <div>
+      <div class="kicker">Kalo Data Brief · Updated July 13, 2026</div>
+      <h1>Top Seat Cushion Content</h1>
+      <div class="subline">Top seat &amp; chair cushion products · videos over $250 revenue · <span id="count"></span></div>
+    </div>
+    <div class="spacer"></div>
+    <div class="toggle">
+      <button id="b1" onclick="setRange(1)">Yesterday</button>
+      <button id="b7" onclick="setRange(7)">7 Days</button>
+      <button id="b30" class="on" onclick="setRange(30)">30 Days</button>
+    </div>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <div class="foot">Source: Kalodata · TikTok Shop US · Tap a video to watch on TikTok · Revenue/views are per selected window</div>
+</div>
+
+<script>
+const D = window.__D = [
+["7649880183066938637","SummerWins Foam","06/10/26",55330,"943.1k",26430,"250.7k",5000,"41.8k"],
+["7652594435397668109","ComfiLife Gel","06/18/26",20000,"497.2k",1940,"60k",360,"13.8k"],
+["7655129969479257375","Cushion Lab Car","06/24/26",15560,"760.9k",11080,"582.4k",3880,"208.7k"],
+["7579145074500521271","SummerWins Foam","12/02/25",6750,"61.9k",0,"",0,""],
+["7646044813413862687","ComfiLife Gel","05/31/26",5330,"121.7k",697,"20.6k",0,""],
+["7644777921864797453","ComfiLife Gel","05/27/26",5020,"121.3k",563,"16.2k",0,""],
+["7642265581353258270","Aoxun Patio","05/21/26",4790,"59.4k",0,"",0,""],
+["7641426492018134303","ComfiLife Gel","05/18/26",4740,"118.4k",1010,"31.9k",0,""],
+["7652111555768732942","Cushion Lab Seat","06/16/26",4650,"155.6k",310,"8.4k",0,""],
+["7602466899254889758","Gel Honeycomb","02/02/26",4510,"204.9k",1000,"50.8k",0,""],
+["7652053566160522527","Gel Honeycomb","06/16/26",4150,"400.5k",508,"27.8k",0,""],
+["7612653112523771150","SummerWins Office","03/02/26",4020,"199.3k",1860,"129k",840,"94.6k"],
+["7640177678716308766","Cushion Lab Seat","05/15/26",3720,"95.6k",778,"22.4k",324,"6.3k"],
+["7645774995288886559","Cushion Lab Seat","05/30/26",3620,"83k",803,"18.4k",270,"4.9k"],
+["7644895652845030687","GEECO Honeycomb","05/28/26",3170,"642.7k",1940,"268.3k",0,""],
+["7630310387719720206","SummerWins Foam","04/18/26",3050,"34.5k",1260,"10.4k",400,"3.3k"],
+["7647713845716208910","Aoxun Patio","06/04/26",2340,"15.6k",0,"",0,""],
+["7638765412108356877","ComfiLife Gel","05/11/26",1940,"38.6k",324,"8.4k",0,""],
+["7614984099421359390","SummerWins Office","03/08/26",1800,"56.3k",435,"15.1k",0,""],
+["7610219995590561037","SummerWins Office","02/23/26",1740,"58.3k",0,"",0,""],
+["7654374493858647309","ComfiLife Gel","06/23/26",1630,"35.8k",328,"10.7k",0,""],
+["7660729204085886239","Cushion Lab Car","07/09/26",1590,"84.4k",1590,"84.4k",893,"48.1k"],
+["7660330516264029453","SummerWins Foam","07/08/26",1580,"16.4k",1580,"16.4k",0,""],
+["7657289103007894815","Cushion Lab Car","06/30/26",1480,"68.6k",924,"49.5k",315,"18k"],
+["7653651984204991758","Cushion Lab Seat","06/20/26",1420,"37k",0,"",0,""],
+["7652208143467859231","Cushion Lab Seat","06/16/26",1340,"35.6k",292,"9.1k",0,""],
+["7650880608633212190","ComfiLife Gel","06/13/26",1320,"23.3k",0,"",0,""],
+["7649469332107316511","Cushion Lab Car","06/09/26",1210,"27.3k",0,"",0,""],
+["7605622852129246495","Gel Honeycomb","02/11/26",1190,"51.8k",264,"10.8k",0,""],
+["7556696086346337567","SummerWins Foam","10/02/25",1170,"12.1k",255,"2k",0,""],
+["7642169350308236557","Aoxun Patio","05/20/26",998,"5.2k",0,"",0,""],
+["7575372407641312542","SummerWins Foam","11/21/25",935,"7.6k",320,"2k",0,""],
+["7653659236404153631","Cushion Lab Seat","06/20/26",862,"21.8k",0,"",0,""],
+["7638627437340871966","ComfiLife Gel","05/11/26",850,"17.6k",0,"",0,""],
+["7652194251362602271","ComfiLife Gel","06/16/26",841,"22.3k",324,"9.8k",0,""],
+["7645366789215489310","ComfiLife Gel","05/29/26",801,"17.2k",0,"",0,""],
+["7634245348973612301","Gel Honeycomb","04/29/26",748,"33.3k",283,"11.5k",0,""],
+["7586519732191268126","Gel Honeycomb","12/21/25",742,"32.8k",0,"",0,""],
+["7653500556748606733","Cushion Lab Seat","06/20/26",737,"19.3k",0,"",0,""],
+["7628050867517803790","Gel Honeycomb","04/12/26",677,"37.2k",0,"",0,""],
+["7651991866145099022","Cushion Lab Seat","06/16/26",642,"16.1k",0,"",0,""],
+["7637153274113559821","SummerWins Foam","05/07/26",600,"2.9k",0,"",0,""],
+["7602641465554078989","SummerWins Foam","02/03/26",595,"3.1k",0,"",0,""],
+["7619164261058612493","Gel Honeycomb","03/19/26",543,"26.6k",0,"",0,""],
+["7634197570050379022","Gel Honeycomb","04/29/26",525,"53.7k",0,"",0,""],
+["7584664940351376695","Gel Honeycomb","12/16/25",510,"26.8k",0,"",0,""],
+["7652657715801509151","Aoxun Patio","06/18/26",452,"3.3k",0,"",0,""],
+["7649262380806933790","Gel Honeycomb","06/09/26",446,"22.5k",0,"",0,""],
+["7657546382563101982","SummerWins Office","07/01/26",440,"39.8k",0,"",0,""],
+["7659529483107487007","Cushion Lab Car","07/06/26",431,"16.3k",431,"16.3k",0,""],
+["7656491148277484814","Cushion Lab Seat","06/28/26",421,"17.8k",0,"",0,""],
+["7659904082684939533","SummerWins Foam","07/07/26",370,"3.6k",370,"3.6k",0,""],
+["7655492065253543199","Cushion Lab Seat","06/25/26",360,"11.1k",0,"",0,""],
+["7661056776946666765","SummerWins Foam","07/10/26",350,"3.7k",350,"3.7k",0,""],
+["7652657813461683487","Aoxun Patio","06/18/26",306,"2.9k",0,"",0,""],
+["7656584897364053279","Cushion Lab Car","06/28/26",273,"5.6k",0,"",0,""],
+["7648771324046822687","Cushion Lab Car","06/07/26",266,"11.2k",0,"",0,""],
+["7652395669155499295","Cushion Lab Car","06/17/26",256,"10.1k",0,"",0,""]
+];
+const fmt = r => r >= 1000 ? '$' + (r/1000).toFixed(2).replace(/\.?0+$/,'') + 'k' : '$' + r.toFixed(0);
+const meta = {};
+function setRange(n){
+  ['b1','b7','b30'].forEach(id=>document.getElementById(id).classList.remove('on'));
+  document.getElementById(n===1?'b1':n===7?'b7':'b30').classList.add('on');
+  const o = n===1 ? 7 : n===7 ? 5 : 3;
+  const list = D.filter(v=>v[o]>250).sort((a,b)=>b[o]-a[o]);
+  document.getElementById('count').textContent = list.length + ' videos';
+  document.getElementById('grid').innerHTML = list.length ? list.map((v,i)=>`
+    <a class="card" id="c_${v[0]}" href="https://www.tiktok.com/@i/video/${v[0]}" target="_blank">
+      <div class="thumb"><span class="ph">▶</span><span class="rank">#${i+1}</span><span class="ptag">${v[1]}</span></div>
+      <div class="cardbody">
+        <div class="nums"><span class="rev">${fmt(v[o])}</span><span class="views">${v[o+1]}${v[o+1]?' views':''}</span></div>
+        <div class="who" id="w_${v[0]}">${v[2]}</div>
+      </div>
+    </a>`).join('') : '<div class="empty">No videos over $250 revenue in this window.</div>';
+  list.forEach(v=>hydrate(v[0], v[2]));
+}
+function applyMeta(id, pub){
+  const m = meta[id]; if(!m) return;
+  const card = document.getElementById('c_'+id);
+  if(!card) return;
+  if(m.url) card.href = m.url;
+  const th = card.querySelector('.thumb');
+  if(m.thumb && !th.querySelector('img')){ const img=new Image(); img.onload=()=>th.prepend(img); img.src=m.thumb; }
+  if(m.handle) document.getElementById('w_'+id).textContent = m.handle + ' · ' + pub;
+}
+function hydrate(id, pub){
+  if(meta[id]){ applyMeta(id, pub); return; }
+  fetch('https://www.tiktok.com/oembed?url=' + encodeURIComponent('https://www.tiktok.com/@i/video/' + id))
+    .then(r=>r.json())
+    .then(j=>{
+      const handle = (j.author_url||'').split('/@')[1] ? '@'+j.author_url.split('/@')[1] : '';
+      meta[id] = {thumb: j.thumbnail_url||'', handle, url: j.author_url ? j.author_url + '/video/' + id : ''};
+      applyMeta(id, pub);
+    }).catch(()=>{ meta[id] = {}; });
+}
+setRange(30);
+const mBtn = document.getElementById('mode');
+function applyMode(m){
+  document.documentElement.dataset.theme = m;
+  mBtn.textContent = m === 'dark' ? '☀️' : '🌙';
+  try{ localStorage.setItem('kalo-theme', m); }catch(e){}
+}
+mBtn.onclick = () => applyMode(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
+let saved = 'light'; try{ saved = localStorage.getItem('kalo-theme') || 'light'; }catch(e){}
+applyMode(saved);
+</script>
+<script>(function(){
+window.__RISING_SINCE="2026-07-06";
+window.__PREV_RISING=["7661056776946666765","7660729204085886239","7660330516264029453","7659904082684939533","7659529483107487007"];
+function pd(s){var p=s.split("/");return new Date(2000+ +p[2], +p[0]-1, +p[1]);}
+function fmt(n){if(n<1000)return ""+n;var s=(n/1000).toFixed(2);while(s.indexOf(".")>-1&&(s.charAt(s.length-1)==="0"||s.charAt(s.length-1)==="."))s=s.slice(0,-1);return s+"k";}
+var bar=document.querySelector(".toggle");
+var rb=document.createElement("button"); rb.id="risingBtn"; rb.textContent="Rising";
+rb.onclick=function(){window.setRange("rising");};
+if(bar) bar.appendChild(rb);
+var _orig=window.setRange;
+window.setRange=function(x){ if(x==="rising"){ if(bar) bar.querySelectorAll("button").forEach(function(b){b.classList.remove("on");}); rb.classList.add("on"); return showRising(); } rb.classList.remove("on"); return _orig(x); };
+function showRising(){
+var sc=new Date(window.__RISING_SINCE+"T00:00:00"); var prev=window.__PREV_RISING||[];
+var list=(window.__D||[]).filter(function(v){return v[3]>250 && pd(v[2])>=sc;});
+list.sort(function(a,b){return pd(b[2])-pd(a[2]) || b[3]-a[3];});
+document.getElementById("count").textContent=list.length+" rising";
+document.getElementById("grid").innerHTML = list.length ? list.map(function(v){
+var pin = prev.indexOf(v[0])===-1;
+var h="<a class=\"card\" id=\"c_"+v[0]+"\" href=\"https://www.tiktok.com/@i/video/"+v[0]+"\" target=\"_blank\">";
+h+="<div class=\"thumb\"><span class=\"ph\">\u25B6</span>"+(pin?"<span class=\"rank\">\uD83D\uDCCC</span>":"")+"<span class=\"ptag\">"+v[1]+"</span></div>";
+h+="<div class=\"cardbody\"><div class=\"nums\"><span class=\"rev\">$"+fmt(v[3])+"</span><span class=\"views\">"+v[4]+" views</span></div>";
+h+="<div class=\"who\" id=\"w_"+v[0]+"\">"+v[2]+"</div></div></a>";
+return h;
+}).join("") : "<div class=\"empty\">No rising videos in the last 7 days.</div>";
+if(window.hydrate) list.forEach(function(v){window.hydrate(v[0], v[2]);});
+}
+window.showRising=showRising;
+})();</script>
+</body>
+</html>
