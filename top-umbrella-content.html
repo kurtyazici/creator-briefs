@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Top Umbrella Content</title>
+<style>
+  :root{
+    --teal:#0e7c7b; --bg:#f7f9fa; --card:#ffffff; --text:#25333f; --muted:#7a8a96;
+    --line:#e5ebee; --heading:#17324d;
+  }
+  html[data-theme="dark"]{
+    --teal:#45c9c6; --bg:#0f1620; --card:#1a2330; --text:#e8eef4; --muted:#9fb0be;
+    --line:#2a3545; --heading:#f2f6fa;
+  }
+  #mode{position:fixed;top:12px;right:12px;z-index:50;width:34px;height:34px;border-radius:50%;
+    border:1px solid rgba(127,127,127,.4);background:var(--card);cursor:pointer;font-size:15px;
+    box-shadow:0 2px 8px rgba(0,0,0,.2);line-height:1}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.45}
+  .wrap{max-width:980px;margin:0 auto;padding:24px 20px 50px}
+  .kicker{text-transform:uppercase;letter-spacing:.16em;font-size:11px;color:var(--muted)}
+  .bar{display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+  h1{font-size:26px;font-weight:800;color:var(--heading);margin-top:2px}
+  .subline{font-size:12px;color:var(--muted);margin-top:2px}
+  .spacer{flex:1}
+  .toggle{display:inline-flex;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:3px}
+  .toggle button{border:0;background:transparent;border-radius:999px;padding:6px 14px;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;white-space:nowrap}
+  .toggle button.on{background:#0e7c7b;color:#fff}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  @media(max-width:820px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:420px){.grid{grid-template-columns:1fr}}
+  a.card{display:block;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;text-decoration:none;color:var(--text);transition:transform .12s}
+  a.card:hover{transform:translateY(-2px)}
+  .thumb{position:relative;aspect-ratio:3/4;background:linear-gradient(135deg,#17324d,#0e7c7b);display:flex;align-items:center;justify-content:center}
+  .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .thumb .ph{color:#fff;opacity:.5;font-size:30px}
+  .thumb .rank{position:absolute;top:8px;left:8px;background:rgba(0,0,0,.55);color:#fff;font-size:11px;font-weight:700;border-radius:6px;padding:2px 7px;z-index:2}
+  .thumb .ptag{position:absolute;bottom:8px;left:8px;right:8px;background:rgba(0,0,0,.55);color:#fff;font-size:10px;font-weight:600;border-radius:6px;padding:2px 7px;z-index:2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .cardbody{padding:8px 10px}
+  .nums{display:flex;justify-content:space-between;align-items:baseline}
+  .rev{font-size:15px;font-weight:800;color:var(--teal)}
+  .views{font-size:12px;color:var(--muted)}
+  .who{font-size:11px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .empty{grid-column:1/-1;text-align:center;color:var(--muted);font-size:13px;padding:30px 0}
+  .foot{font-size:11px;color:var(--muted);margin-top:14px}
+</style>
+</head>
+<body>
+<button id="mode" title="Toggle light/dark mode">🌙</button>
+<div class="wrap">
+  <div class="bar">
+    <div>
+      <div class="kicker">Kalo Data Brief · Updated July 13, 2026</div>
+      <h1>Top Umbrella Content</h1>
+      <div class="subline">Top patio &amp; beach umbrella products · videos over $250 revenue · <span id="count"></span></div>
+    </div>
+    <div class="spacer"></div>
+    <div class="toggle">
+      <button id="b1" onclick="setRange(1)">Yesterday</button>
+      <button id="b7" onclick="setRange(7)">7 Days</button>
+      <button id="b30" class="on" onclick="setRange(30)">30 Days</button>
+    </div>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <div class="foot">Source: Kalodata · TikTok Shop US · Tap a video to watch on TikTok · Revenue/views are per selected window</div>
+</div>
+
+<script>
+const D = window.__D = [
+["7655149714337189134","Garvee 15ft","06/24/26",118740,"8.3m",3710,"446.6k",1280,"140.6k"],
+["7647631471535983886","Garvee 15ft","06/04/26",87710,"2.1m",0,"",0,""],
+["7654473213136686349","SummerVibes 15ft","06/23/26",54020,"274.3k",13090,"89.3k",2010,"11.1k"],
+["7646827279280000269","Floating Pool","06/02/26",53390,"1.4m",6620,"165.6k",1210,"43.5k"],
+["7645838421985889566","PHIVILLA 15ft","05/30/26",48390,"2.1m",3420,"137.8k",460,"15.2k"],
+["7655936627566595342","PHIVILLA 15ft","06/27/26",44160,"3.6m",15500,"875.8k",1840,"65.1k"],
+["7644322897791618334","Floating Pool","05/26/26",42170,"1.2m",6240,"159.8k",1540,"56.5k"],
+["7653341078040464653","Garvee 15ft","06/20/26",41430,"1.2m",559,"59.1k",0,""],
+["7649763946609511711","Garvee 15ft","06/10/26",39170,"1m",0,"",0,""],
+["7652202392020126989","SummerVibes 15ft","06/16/26",34980,"169.3k",4700,"33k",0,""],
+["7656543899359530270","Crown Shades","06/28/26",31560,"1m",8520,"197.9k",360,"9.9k"],
+["7654142617210408205","SummerVibes 15ft","06/22/26",25000,"115k",2520,"16.8k",0,""],
+["7637709638862933261","VEVOR Gazebo","05/08/26",21310,"300.7k",1120,"13.7k",0,""],
+["7643127606878948638","Floating Pool","05/23/26",16130,"451.4k",1650,"47.8k",440,"17.5k"],
+["7652512377476336910","PHIVILLA 15ft","06/17/26",12620,"513.5k",830,"35.2k",0,""],
+["7615034359288139022","PHIVILLA 15ft","03/08/26",12560,"510.6k",2000,"85.8k",0,""],
+["7632309200915303693","VEVOR Gazebo","04/24/26",11180,"138.4k",1120,"15.9k",0,""],
+["7632103574394129678","VEVOR Gazebo","04/23/26",10300,"124.8k",1760,"24.6k",0,""],
+["7608524956737096991","Yaheetech Duo","02/19/26",10290,"649.8k",1320,"71.1k",0,""],
+["7657338928600550686","Floating Pool","06/30/26",9820,"283.5k",4120,"110.8k",1320,"45.5k"],
+["7640544101686889741","Yaheetech RGB","05/16/26",9490,"208k",1170,"25.7k",0,""],
+["7654115146503130381","Garvee 15ft","06/22/26",9430,"359.9k",0,"",0,""],
+["7628030829104549134","Yaheetech RGB","04/12/26",8510,"194.8k",900,"22.6k",0,""],
+["7638327806018997534","Floating Pool","05/10/26",8100,"206.7k",1300,"34.3k",0,""],
+["7646929709732875533","Yaheetech Solar","06/03/26",7080,"246.7k",1560,"43.5k",360,"9.1k"],
+["7632855376123219214","Yaheetech RGB","04/25/26",6990,"162k",810,"21.7k",0,""],
+["7655082130665393438","Crown Shades","06/24/26",6610,"146.2k",600,"10.4k",0,""],
+["7651378373616225567","VEVOR Gazebo","06/14/26",6100,"74.7k",0,"",0,""],
+["7638843759098105119","Floating Pool","05/11/26",5770,"139.1k",1390,"33.4k",0,""],
+["7657338000577137934","Crown Shades","06/30/26",5430,"138.6k",3720,"83.1k",480,"13.8k"],
+["7657870982580931853","SummerVibes 15ft","07/02/26",5370,"33.5k",3440,"23.2k",1340,"7.2k"],
+["7648068210654252301","PHIVILLA 15ft","06/05/26",5310,"179.7k",0,"",0,""],
+["7654055830844656909","Garvee 15ft","06/21/26",4940,"104.1k",0,"",0,""],
+["7632123398012833038","COSTWAY 15ft","04/24/26",4780,"139.6k",1140,"37.6k",0,""],
+["7650581560369941774","Garvee 15ft","06/12/26",4670,"82.4k",0,"",0,""],
+["7654401140347473165","Yaheetech Solar","06/22/26",4470,"135k",1920,"51.8k",0,""],
+["7633485766856936734","Floating Pool","04/27/26",4430,"94.4k",1410,"31.2k",0,""],
+["7661101831958957325","Floating Pool","07/10/26",4290,"122.9k",4290,"122.9k",990,"33.4k"],
+["7650925127709887758","Floating Pool","06/13/26",4230,"104.3k",0,"",0,""],
+["7629179833163042078","COSTWAY 15ft","04/15/26",4160,"150.7k",684,"22.7k",0,""],
+["7655234377651080461","Crown Shades","06/26/26",4040,"119.8k",0,"",0,""],
+["7648433793463782669","Yaheetech RGB","06/06/26",3950,"105.9k",1710,"40.4k",450,"11.5k"],
+["7651653326274153759","PHIVILLA 15ft","06/15/26",3920,"139.5k",0,"",0,""],
+["7643646673616522526","Yaheetech Solar","05/24/26",3900,"164.3k",0,"",0,""],
+["7634935869023079711","Floating Pool","05/01/26",3770,"69.2k",625,"11k",0,""],
+["7657339461247814926","Crown Shades","06/30/26",3690,"109k",1800,"39.2k",0,""],
+["7650078665174256910","VEVOR Gazebo","06/11/26",3640,"34.9k",800,"6.7k",0,""],
+["7651059714221985037","VEVOR Gazebo","06/13/26",3610,"44.8k",320,"3.5k",0,""],
+["7651935739038502158","SummerVibes 15ft","06/16/26",3520,"19.7k",1170,"9.2k",0,""],
+["7651788811701079327","Garvee 15ft","06/15/26",3520,"66.9k",0,"",0,""],
+["7625781544711376159","PHIVILLA 15ft","04/06/26",3440,"98.8k",355,"11.3k",0,""],
+["7608170086515445006","PHIVILLA 15ft","02/18/26",3200,"104.2k",585,"17.8k",0,""],
+["7654873609172733197","Crown Shades","06/24/26",3100,"71.3k",600,"9.5k",0,""],
+["7659114695584140557","PHIVILLA 15ft","07/05/26",2960,"120.9k",2960,"118k",460,"15.3k"],
+["7625839828348800287","PHIVILLA 15ft","04/07/26",2950,"85.4k",475,"10.9k",0,""],
+["7649928221881945374","Crown Shades","06/10/26",2850,"39.3k",0,"",0,""],
+["7611397598653451550","Yaheetech Solar","02/26/26",2770,"90.9k",660,"16.9k",0,""],
+["7647000984668966157","COSTWAY 15ft","06/02/26",2630,"107.8k",0,"",0,""],
+["7623433048779934990","Yaheetech Solar","03/31/26",2580,"78.4k",720,"19.1k",0,""],
+["7607658149390208270","COSTWAY 15ft","02/16/26",2500,"78k",0,"",0,""],
+["7615101060666887437","Yaheetech Solar","03/09/26",2380,"82.7k",420,"8.8k",0,""],
+["7655090642405641485","Crown Shades","06/24/26",2230,"58.4k",0,"",0,""],
+["7622103511341239583","Yaheetech Solar","03/27/26",2200,"69.2k",600,"16.6k",0,""],
+["7655514029565250830","Garvee 15ft","06/25/26",2200,"125.3k",0,"",0,""],
+["7653912658336402718","Crown Shades","06/21/26",2040,"34.4k",0,"",0,""],
+["7650223027434589471","Garvee 15ft","06/11/26",1990,"50.5k",0,"",0,""],
+["7654509582559022350","SummerVibes 15ft","06/23/26",1930,"10.5k",671,"4.5k",0,""],
+["7629432450896153886","Yaheetech Duo","04/16/26",1920,"96.8k",300,"11.7k",0,""],
+["7644633425986522382","COSTWAY 15ft","05/28/26",1820,"50.4k",304,"9.4k",0,""],
+["7655270220772281614","VEVOR Gazebo","06/25/26",1760,"19.9k",0,"",0,""],
+["7507456973382765867","Yaheetech Solar","05/22/25",1530,"42.1k",0,"",0,""],
+["7639683625461484813","COSTWAY 15ft","05/14/26",1520,"46.1k",456,"13k",0,""],
+["7660258858413083935","Crown Shades","07/08/26",1440,"32.4k",1440,"32.4k",600,"18.7k"],
+["7651286720108891406","VEVOR Gazebo","06/14/26",1420,"19.8k",0,"",0,""],
+["7659464148811664671","COSTWAY 15ft","07/06/26",1290,"44k",1290,"44k",0,""],
+["7628812745651129631","COSTWAY 15ft","04/14/26",1290,"34.1k",0,"",0,""],
+["7650269145367448863","COSTWAY 15ft","06/11/26",1220,"33.8k",0,"",0,""],
+["7649018439582928142","Yaheetech RGB","06/08/26",1160,"28.1k",0,"",0,""],
+["7636898579986074894","Yaheetech Solar","05/07/26",1120,"29.3k",360,"6.1k",0,""],
+["7649077735226199310","Yaheetech Solar","06/09/26",1110,"34k",360,"7.7k",0,""],
+["7632294402072907038","VEVOR Gazebo","04/24/26",1110,"16.2k",0,"",0,""],
+["7621243481553390879","COSTWAY 15ft","03/25/26",1060,"29.2k",0,"",0,""],
+["7654981671250431262","VEVOR Gazebo","06/24/26",959,"8.9k",0,"",0,""],
+["7656907358962027806","Yaheetech RGB","06/29/26",900,"17.8k",0,"",0,""],
+["7638413066782166303","Yaheetech Duo","05/10/26",888,"50.1k",0,"",0,""],
+["7655533234003938573","Yaheetech RGB","06/28/26",720,"13.3k",0,"",0,""],
+["7627673474953252110","Yaheetech RGB","04/11/26",715,"18.9k",0,"",0,""],
+["7658495902058941727","Yaheetech Duo","07/03/26",550,"21.4k",300,"10.6k",0,""],
+["7660363297904004366","Yaheetech RGB","07/08/26",540,"11k",540,"11k",270,"7.2k"],
+["7650700674795048205","Yaheetech RGB","06/12/26",537,"10.2k",0,"",0,""],
+["7642028412370013454","Yaheetech Duo","05/20/26",305,"24.8k",0,"",0,""]
+];
+const fmt = r => r >= 1000 ? '$' + (r/1000).toFixed(2).replace(/\.?0+$/,'') + 'k' : '$' + r.toFixed(0);
+const meta = {};
+function setRange(n){
+  ['b1','b7','b30'].forEach(id=>document.getElementById(id).classList.remove('on'));
+  document.getElementById(n===1?'b1':n===7?'b7':'b30').classList.add('on');
+  const o = n===1 ? 7 : n===7 ? 5 : 3;
+  const list = D.filter(v=>v[o]>250).sort((a,b)=>b[o]-a[o]);
+  document.getElementById('count').textContent = list.length + ' videos';
+  document.getElementById('grid').innerHTML = list.length ? list.map((v,i)=>`
+    <a class="card" id="c_${v[0]}" href="https://www.tiktok.com/@i/video/${v[0]}" target="_blank">
+      <div class="thumb"><span class="ph">▶</span><span class="rank">#${i+1}</span><span class="ptag">${v[1]}</span></div>
+      <div class="cardbody">
+        <div class="nums"><span class="rev">${fmt(v[o])}</span><span class="views">${v[o+1]}${v[o+1]?' views':''}</span></div>
+        <div class="who" id="w_${v[0]}">${v[2]}</div>
+      </div>
+    </a>`).join('') : '<div class="empty">No videos over $250 revenue in this window.</div>';
+  list.forEach(v=>hydrate(v[0], v[2]));
+}
+function applyMeta(id, pub){
+  const m = meta[id]; if(!m) return;
+  const card = document.getElementById('c_'+id);
+  if(!card) return;
+  if(m.url) card.href = m.url;
+  const th = card.querySelector('.thumb');
+  if(m.thumb && !th.querySelector('img')){ const img=new Image(); img.onload=()=>th.prepend(img); img.src=m.thumb; }
+  if(m.handle) document.getElementById('w_'+id).textContent = m.handle + ' · ' + pub;
+}
+function hydrate(id, pub){
+  if(meta[id]){ applyMeta(id, pub); return; }
+  fetch('https://www.tiktok.com/oembed?url=' + encodeURIComponent('https://www.tiktok.com/@i/video/' + id))
+    .then(r=>r.json())
+    .then(j=>{
+      const handle = (j.author_url||'').split('/@')[1] ? '@'+j.author_url.split('/@')[1] : '';
+      meta[id] = {thumb: j.thumbnail_url||'', handle, url: j.author_url ? j.author_url + '/video/' + id : ''};
+      applyMeta(id, pub);
+    }).catch(()=>{ meta[id] = {}; });
+}
+setRange(30);
+const mBtn = document.getElementById('mode');
+function applyMode(m){
+  document.documentElement.dataset.theme = m;
+  mBtn.textContent = m === 'dark' ? '☀️' : '🌙';
+  try{ localStorage.setItem('kalo-theme', m); }catch(e){}
+}
+mBtn.onclick = () => applyMode(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
+let saved = 'light'; try{ saved = localStorage.getItem('kalo-theme') || 'light'; }catch(e){}
+applyMode(saved);
+</script>
+<script>(function(){
+window.__RISING_SINCE="2026-07-06";
+window.__PREV_RISING=["7661101831958957325","7660258858413083935","7660363297904004366","7659464148811664671"];
+function pd(s){var p=s.split("/");return new Date(2000+ +p[2], +p[0]-1, +p[1]);}
+function fmt(n){if(n<1000)return ""+n;var s=(n/1000).toFixed(2);while(s.indexOf(".")>-1&&(s.charAt(s.length-1)==="0"||s.charAt(s.length-1)==="."))s=s.slice(0,-1);return s+"k";}
+var bar=document.querySelector(".toggle");
+var rb=document.createElement("button"); rb.id="risingBtn"; rb.textContent="Rising";
+rb.onclick=function(){window.setRange("rising");};
+if(bar) bar.appendChild(rb);
+var _orig=window.setRange;
+window.setRange=function(x){ if(x==="rising"){ if(bar) bar.querySelectorAll("button").forEach(function(b){b.classList.remove("on");}); rb.classList.add("on"); return showRising(); } rb.classList.remove("on"); return _orig(x); };
+function showRising(){
+var sc=new Date(window.__RISING_SINCE+"T00:00:00"); var prev=window.__PREV_RISING||[];
+var list=(window.__D||[]).filter(function(v){return v[3]>250 && pd(v[2])>=sc;});
+list.sort(function(a,b){return pd(b[2])-pd(a[2]) || b[3]-a[3];});
+document.getElementById("count").textContent=list.length+" rising";
+document.getElementById("grid").innerHTML = list.length ? list.map(function(v){
+var pin = prev.indexOf(v[0])===-1;
+var h="<a class=\"card\" id=\"c_"+v[0]+"\" href=\"https://www.tiktok.com/@i/video/"+v[0]+"\" target=\"_blank\">";
+h+="<div class=\"thumb\"><span class=\"ph\">\u25B6</span>"+(pin?"<span class=\"rank\">\uD83D\uDCCC</span>":"")+"<span class=\"ptag\">"+v[1]+"</span></div>";
+h+="<div class=\"cardbody\"><div class=\"nums\"><span class=\"rev\">$"+fmt(v[3])+"</span><span class=\"views\">"+v[4]+" views</span></div>";
+h+="<div class=\"who\" id=\"w_"+v[0]+"\">"+v[2]+"</div></div></a>";
+return h;
+}).join("") : "<div class=\"empty\">No rising videos in the last 7 days.</div>";
+if(window.hydrate) list.forEach(function(v){window.hydrate(v[0], v[2]);});
+}
+window.showRising=showRising;
+})();</script>
+</body>
+</html>
